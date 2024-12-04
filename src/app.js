@@ -1,11 +1,12 @@
 const express = require('express')
 const app = express()
 const dotenv = require('dotenv')
-const adminAuthorization = require('./middleware/adminAuthorization')
 dotenv.config()
-const PORT = process.env.PORT
+// const PORT = process.env.PORT
+const cors = require('cors')
+const adminAuthorization = require('./middleware/adminAuthorization')
 
-
+app.use(cors())
 app.use(express.json())
 app.get('/', (res, req) => {
     console.log(tes)
@@ -21,6 +22,7 @@ app.use('/api/materials', materialController)
 app.use('/api/spk', spkController)
 app.use('/api/user', adminAuthorization, userController)
 
-app.listen(PORT, () => {
-    console.log('server berjalan port : ' + PORT)
-})
+export default app;
+// app.listen(PORT, () => {
+//     console.log('server berjalan port : ' + PORT)
+// })
